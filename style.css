@@ -25,6 +25,7 @@ body {
 #main-header {
   background: var(--secondary-color);
   padding: 4rem 0;
+  margin-bottom: 2rem;
 }
 
 #main-header h1,
@@ -46,4 +47,119 @@ p {
 
 #timeline {
   padding-bottom: 1rem;
+}
+
+#timeline ul li {
+  list-style-type: none;
+  width: .6rem;
+  padding-top: 3.2rem;
+  position: relative;
+  background-color: #fff;
+  margin: 0 auto;
+}
+
+#timeline ul li::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  height: 1.8rem;
+  width: 1.8rem;
+  border-radius: 50%;
+  background-color: #fff;
+  transition: background-color .5s ease-in-out;
+}
+
+#timeline ul li div {
+  width: 42rem;
+  background-color: var(--secondary-color);
+  color: #fff;
+  position: relative;
+  padding: 1rem;
+  bottom: 0;
+  border-radius: .2rem;
+  opacity: 0;
+  visibility: hidden;
+  transition: all .5s ease-in-out;
+}
+
+#timeline ul li div::after {
+  content: "";
+  height: 0;
+  width: 0;
+  position: absolute;
+  bottom: 3px;
+  border-style: solid;
+}
+
+#timeline ul li:nth-child(odd) div {
+  left: 3.5rem;
+  transform: translateX(10rem);
+}
+
+#timeline ul li:nth-child(even) div {
+  left: -45rem;
+  transform: translateX(-10rem);
+}
+
+#timeline ul li:nth-child(odd) div::after {
+  left: -15px;
+  border-width: 8px 16px 8px 0px;
+  border-color: transparent var(--secondary-color) transparent transparent;
+}
+
+#timeline ul li:nth-child(even) div::after {
+  right: -15px;
+  border-width: 8px 0px 8px 16px;
+  border-color: transparent transparent transparent var(--secondary-color);
+}
+
+#timeline ul li.active::after {
+  background-color: var(--secondary-color);
+}
+
+/* #timeline ul li.active div {
+    transform: none;
+    opacity: 1;
+    visibility: visible;
+} */
+
+@media (max-width: 900px) {
+  #timeline ul li div {
+    width: 25rem;
+  }
+
+  #timeline ul li:nth-child(even) div {
+    left: -28rem;
+  }
+}
+
+@media (max-width: 600px) {
+  #timeline ul li {
+    margin-left: 2rem;
+  }
+
+  #timeline ul li div {
+    width: calc(100vw - 8.5rem);
+  }
+
+  #timeline ul li:nth-child(even) div {
+    left: 3.5rem;
+    transform: translateX(10rem);
+  }
+
+  #timeline ul li:nth-child(even) div::after {
+    left: -15px;
+    border-width: 8px 16px 8px 0px;
+    border-color: transparent var(--secondary-color) transparent transparent;
+  }
+}
+
+/* Moved here as a last line for specificity (based on ordering) - Check line - 149 (inside media query of max-width 600 -> li's even child) */
+/* The above media query selector and the following selector has same specificity.  So, I moved the following selecter here as a last line */
+#timeline ul li.active div {
+  transform: none;
+  opacity: 1;
+  visibility: visible;
 }
